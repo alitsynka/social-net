@@ -1,0 +1,15 @@
+.Wrapper{
+	background-color: lightpink;
+	min-height: 90vh;
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	padding-top: 20px;
+	box-sizing: border-box;
+}
+.DialogsWrapper{
+	margin-left: 50px ;
+}
+.Items{
+	margin-left: 30px ;
+}

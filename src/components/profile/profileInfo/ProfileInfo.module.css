@@ -1,0 +1,11 @@
+.image{
+	margin: 3px 10px;
+	border: 2px solid black;
+	min-height: 50vh;
+	min-width: 95%;
+	background: url('../../../assets/images/priroda.jpg') no-repeat center ;
+	background-size: cover;
+}
+.ava{
+	padding: 30px 0px 30px 30px;
+}

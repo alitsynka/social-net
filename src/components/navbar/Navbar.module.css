@@ -1,0 +1,24 @@
+.Wrapper{
+	background-color: lightgoldenrodyellow;
+	width: 20%;
+	min-height: 90vh;
+	padding-top:30px;
+	box-sizing: border-box;
+	
+}
+.Nav{
+	text-decoration: none;
+	color: black;
+	font-family: Arial;
+	font-weight: bolder;
+}
+.Nav:focus{
+	color:goldenrod;
+}
+.Nav:hover{
+	text-decoration: underline;
+}
+.NavWrapper{
+	padding-left: 20px;
+	padding-bottom: 10px;
+}

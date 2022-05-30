@@ -1,0 +1,19 @@
+.Wrapper{
+	min-height: 10vh;
+	max-width: 80%;
+	background-color: #ea0a8a;
+	/*border:2px solid black;*/
+	margin: 0 auto;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	box-sizing: border-box;
+}
+.image{
+	height: 60px;
+	width: 60px;
+	margin: 10px 10px;
+	/*border: 2px solid black;*/
+	background: url("../../assets/images/manchester.png") center no-repeat;
+	background-size: contain;
+}
