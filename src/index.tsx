@@ -1,10 +1,13 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {StateType, store} from "./redux/state";
+import {StateType} from "./redux/state";
 
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import {Provider} from "react-redux";
+// import {Provider, StoreContext} from "./storeContext";
+import {store} from "./redux/reduxState";
 // import {store} from "./redux/reduxState";
 
 
@@ -14,11 +17,9 @@ export const rerenderEntireTree = (state:StateType) => {
     );
     root.render(
         <React.StrictMode>
-
-            <App appState={state}
-                 dispatch={store.dispatch.bind(store)}
-                 store={store}
-            />
+               <Provider store={store}>
+                   <App/>
+               </Provider>
         </React.StrictMode>
 
     );

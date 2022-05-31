@@ -1,0 +1,17 @@
+.Wrapper{
+	background-color: lightpink;
+	min-height: 90vh;
+	width: 100%;
+	/*box-sizing: border-box;*/
+	/*border: 2px solid #ea0a8a;*/
+}
+.imag{
+	background-image: url("./images/team.png");
+	height: 70px;
+	width: 65px;
+	background-size: contain;
+	border: 2px solid goldenrod;
+}
+.selectPage{
+	font-weight: bold;
+}

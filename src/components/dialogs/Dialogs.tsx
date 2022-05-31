@@ -3,6 +3,7 @@ import s from './Dialogs.module.css'
 import {DialogMessage} from "./message/DialogMessage";
 import {DialogItem} from "./item/DialogItem";
 import {MessagesPageType} from "../../redux/state";
+import {store} from "../../redux/reduxState";
 
 
 export type ItemPropsType = {
@@ -30,7 +31,7 @@ export const Dialogs = (props: DialogsType) => {
     }
     const onMessageChangeClick = (e:ChangeEvent<HTMLTextAreaElement>) => {
           let newMessageBody =  e.currentTarget.value
-       props.updateNewMessageBody(newMessageBody)
+            props.updateNewMessageBody(newMessageBody)
     }
 
     return (

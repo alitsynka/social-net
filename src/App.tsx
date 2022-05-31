@@ -8,6 +8,8 @@ import s from "./components/main/Main.module.css";
 import {Navbar} from "./components/navbar/Navbar";
 import {ActionsType, StateType, StoreType} from "./redux/state";
 import {DialogsContainer} from "./components/dialogs/DialogsContainer";
+import {Users} from "./components/users/Users";
+import {UsersContainer} from "./components/users/UsersContainer";
 
 export type ProfilePropsType = {
     id: number
@@ -16,9 +18,9 @@ export type ProfilePropsType = {
 }
 
 type AppType = {
-    appState: StateType
-    dispatch: (action: ActionsType) => void
-    store:StoreType
+    // appState: StateType
+    // dispatch: (action: ActionsType) => void
+    // store:StoreType
 }
 
 function App(props: AppType) {
@@ -33,14 +35,12 @@ function App(props: AppType) {
                     <Navbar/>
                     <Routes>
                         <Route path='/profile' element={
-                            <Profile
-                                store={props.store}
-                            />}
+                            <Profile/>}
                         />
                         <Route path='/dialogs' element={
-                            <DialogsContainer
-                                store={props.store}
-                            />}/>
+                            <DialogsContainer/>}/>
+                        <Route path='/users' element={
+                            <UsersContainer/>}/>
                     </Routes>
                 </div>
 

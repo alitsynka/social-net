@@ -35,7 +35,7 @@ export type UpdateNewMessageBodyTypeAC = {
 }
 export type SendNewMessageBodyTypeAC = {
     type: "SEND-NEW-MESSAGE-BODY"
-    newMessageBody: string
+    // newMessageBody: string
 }
 export type ActionsType = UpdateNewPostTypeAC
                         | AddPostTypeAC
@@ -55,7 +55,7 @@ export type StoreType = {
     dispatch:(action:any) => void
 }
 
-export const store:StoreType = {
+ const store:StoreType = {
     _state: {
         profilePage: {
             posts: [

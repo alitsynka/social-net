@@ -3,7 +3,6 @@ import {
     MessagesPageType,
     NewMessageBodyType,
     SendNewMessageBodyTypeAC,
-    StateType,
     UpdateNewMessageBodyTypeAC
 } from "./state";
 
@@ -33,19 +32,23 @@ export const dialogsReducer = (state: MessagesPageType = initialState, action: D
 
     switch (action.type){
         case "UPDATE-NEW-MESSAGE-BODY": {
-             state.newMessageBody = action.newMessageBody
-            return state
+            const stateCopy = {
+                ...state,
+                newMessageBody:action.newMessageBody
+            }
+            return stateCopy
         }
         case "SEND-NEW-MESSAGE-BODY": {
-            let newMessage: NewMessageBodyType = {
-                id: 5,
-                message: state.newMessageBody
+            let body = state.newMessageBody
+            const stateCopy = {
+                ...state,
+                newMessageBody:"",
+                messages: [...state.messages, {id:6, message:body}]
             }
-            state.newMessageBody = ''
-            state.messages.push(newMessage)
-            return state
+            return stateCopy
         }
-        default: return state
+        default:
+            return state
     }
 }
 export const UpdateNewMessageBodyAC = (newMessageBody: string): UpdateNewMessageBodyTypeAC => {
@@ -54,9 +57,9 @@ export const UpdateNewMessageBodyAC = (newMessageBody: string): UpdateNewMessage
         newMessageBody
     }
 }
-export const SendNewMessageBodyAC = (newMessageBody: string): SendNewMessageBodyTypeAC => {
+export const SendNewMessageBodyAC = (): SendNewMessageBodyTypeAC => {
     return {
         type: "SEND-NEW-MESSAGE-BODY" as const,
-        newMessageBody
+
     }
 }

@@ -1,36 +1,32 @@
 import React from "react";
-import {Post} from "./Post/Post";
-import s from './MyPosts.module.css'
-import {ProfilePropsType} from "../../../App";
-import {ActionsType, ProfilePageType, StoreType} from "../../../redux/state";
+import { StateType} from "../../../redux/state";
 import {addPostAC, UpdateNewPostAC} from "../../../redux/profileReducer";
 import {MyPosts} from "./MyPosts";
+import {StoreContext} from "../../../storeContext";
+import {connect} from "react-redux";
 
 
 type MyPostsType = {
-    store:StoreType
+    // store:StoreType
 }
 
 
-
-export const MyPostsContainer = (props:MyPostsType) => {
-
-    let state = props.store.getState()
-
-    // const newPostElement = React.createRef<HTMLTextAreaElement>()
-
-    const addPost = () => {
-           props.store.dispatch(addPostAC())
+const mapStateToProps = (state:StateType) => {
+    return{
+        posts:state.profilePage.posts,
+        newPostText:state.profilePage.newPostText
     }
-
-    const onPostChange = (text:string) => {
-            props.store.dispatch(UpdateNewPostAC(text))
-    }
-
-    return (
-        <MyPosts posts={state.profilePage.posts}
-                 newPostText={state.profilePage.newPostText}
-                 addPost={addPost}
-                 updateNewPostText={onPostChange}/>
-    )
 }
+const mapDispatchToProps = (dispatch:any) => {
+    return{
+        updateNewPostText:(text:string) => {
+            dispatch(UpdateNewPostAC(text))
+        },
+        addPost:() => {
+            dispatch(addPostAC())
+    }
+    }
+}
+
+
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)

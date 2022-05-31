@@ -22,13 +22,19 @@ export const profileReducer = (state:ProfilePageType = initialState, action:Prof
                 message: state.newPostText,
                 likeCount: 0
             }
-            state.posts.push(newPost)
-             state.newPostText = ''
-            return state
+            const stateCopy = {
+                ...state,
+                posts:[...state.posts, newPost],
+                newPostText:""
+            }
+            return stateCopy
         }
         case "UPDATE-NEW-POST-TEXT": {
-             state.newPostText = action.newText
-            return state
+            const stateCopy = {
+                ...state,
+            newPostText:action.newText
+            }
+            return stateCopy
         }
         default: return state
 }}
