@@ -10,6 +10,7 @@ import {ActionsType, StateType, StoreType} from "./redux/state";
 import {DialogsContainer} from "./components/dialogs/DialogsContainer";
 import {Users} from "./components/users/Users";
 import {UsersContainer} from "./components/users/UsersContainer";
+import {ProfileContainer} from "./components/profile/ProfileContainer";
 
 export type ProfilePropsType = {
     id: number
@@ -35,7 +36,7 @@ function App(props: AppType) {
                     <Navbar/>
                     <Routes>
                         <Route path='/profile' element={
-                            <Profile/>}
+                            <ProfileContainer/>}
                         />
                         <Route path='/dialogs' element={
                             <DialogsContainer/>}/>

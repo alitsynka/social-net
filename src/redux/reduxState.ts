@@ -4,11 +4,12 @@ import {dialogsReducer} from "./dialogsReducer";
 import {StoreType} from "./state";
 import {UsersReducer} from "./UsersReducer";
 
-const AppRootState = combineReducers({
+const rootReducer = combineReducers({
         profilePage: profileReducer,
         messagesPage: dialogsReducer,
         usersPage:UsersReducer
     }
 )
+export type AppStateType = typeof rootReducer
 
-export const store = createStore(AppRootState)
+export const store = createStore(rootReducer)

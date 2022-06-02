@@ -71,7 +71,7 @@ type ActionsType = FollowType | UnFollowType
     | SetUsersType |SetCurrentPageType
     | setTotalUsersCountType | toggleIsFetchingType
 
-export const UsersReducer = (state:UsersStateType = initialState, action:ActionsType) => {
+export const UsersReducer = (state:UsersStateType = initialState, action:ActionsType):UsersStateType => {
    switch (action.type){
        case "FOLLOW":{
 

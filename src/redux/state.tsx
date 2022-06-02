@@ -6,6 +6,7 @@ import {dialogsReducer} from "./dialogsReducer";
 export type ProfilePageType = {
     posts: Array<ProfilePropsType>
     newPostText: string
+    profile:null
 }
 export type MessagesPageType = {
     items: Array<ItemPropsType>
@@ -64,7 +65,8 @@ export type StoreType = {
                 {id: 3, message: 'Ostalbeney', likeCount: 4},
                 {id: 4, message: 'Wisley', likeCount: 40},
             ],
-            newPostText: 'it its my job'
+            newPostText: 'it its my job',
+            profile:null
         },
 
         messagesPage: {

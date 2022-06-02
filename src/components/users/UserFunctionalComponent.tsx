@@ -1,6 +1,8 @@
 import s from "./Users.module.css";
 import React from "react";
 import {UserType} from "../../redux/UsersReducer";
+import {NavLink} from "react-router-dom";
+import team from "./images/team.png"
 
 type UserFuncType = {
     totalUsersCount:number
@@ -36,8 +38,10 @@ export const UserFunctionalComponent = (props:UserFuncType) => {
                     return (
                         <div key={u.id}>
                             <div className={s.ava}>
-                                <div className={s.imag}>
-                                </div>
+                                <NavLink to={"/profile" }>
+                                    <img className={s.imag} src={team}/>
+                                </NavLink>
+
                                 <div>
                                     {
                                         u.followed

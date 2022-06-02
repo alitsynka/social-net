@@ -9,13 +9,13 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 
 export type ProfileType = {
-    // store:StoreType
+    profile:null
 }
 
 export const Profile = (props:ProfileType) => {
     return(
         <div className={s.Wrapper}>
-           <ProfileInfo/>
+           <ProfileInfo profile={props.profile}/>
             <MyPostsContainer />
         </div>
     )

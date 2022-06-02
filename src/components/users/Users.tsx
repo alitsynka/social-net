@@ -1,6 +1,6 @@
 import React from "react";
 import s from './Users.module.css'
-import {UsersStateType, UserType} from "../../redux/UsersReducer";
+import { UserType} from "../../redux/UsersReducer";
 import axios from "axios";
 
 type UsersCurrentlyType = {
@@ -18,6 +18,7 @@ export const Users = (props: any) => {
                     axios.get("https://social-network.samuraijs.com/api/1.0/users")
                         .then((res) => {
                             props.setUsers(res.data.items)
+                           props.setTotalUsersCount(res.data.totalCount)
                         })
 
                 }
