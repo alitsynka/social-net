@@ -7,6 +7,9 @@ import {ProfilePropsType} from "../../App";
 import {followUsersAC} from "../../redux/UsersReducer";
 import {SetUserProfileAC} from "../../redux/profileReducer";
 import {Dispatch} from "redux";
+import {withRouter} from "../WithRouter/WithRouter";
+
+
 
 type StateTypeForProfileContainer = {
     posts: Array<ProfilePropsType>
@@ -18,10 +21,21 @@ type StateTypeForProfileContainer = {
 export class ProfileApiContainer extends React.Component<any>{
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile`)
-            .then(res => {
-            this.props.setUsersProfile(res.data)
-            })
+
+        let userId = this.props.router.params?.userId;
+        // console.log(this.props)
+        if(userId){
+            axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
+                .then(res => {
+                    // console.log(res.data)
+                    this.props.setUserProfile(res.data)
+                })
+        }
+
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile`)
+        //     .then(res => {
+        //     this.props.setUsersProfile(res.data)
+        //     })
 
     }
 
@@ -38,11 +52,19 @@ const mapStateToProps = (state:any) => {
          }
     }
 
-const mapDispatchToProfileProps = (dispatch:Dispatch) => {
+const mapDispatchToProps = (dispatch:Dispatch) => {
     return {
         setUserProfile: (profile: number) => {
             dispatch(SetUserProfileAC(profile))
         }
     }
 }
-export  const ProfileContainer =  connect(mapStateToProps, mapDispatchToProfileProps)(ProfileApiContainer)
+
+
+
+
+const WithUrlDataContainerComponent = withRouter(ProfileApiContainer)
+
+
+
+export  const ProfileContainer =  connect(mapStateToProps, mapDispatchToProps)(WithUrlDataContainerComponent)

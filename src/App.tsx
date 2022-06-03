@@ -11,6 +11,7 @@ import {DialogsContainer} from "./components/dialogs/DialogsContainer";
 import {Users} from "./components/users/Users";
 import {UsersContainer} from "./components/users/UsersContainer";
 import {ProfileContainer} from "./components/profile/ProfileContainer";
+import HeaderContainer from "./components/header/HeaderContainer";
 
 export type ProfilePropsType = {
     id: number
@@ -30,19 +31,21 @@ function App(props: AppType) {
     return (
         <BrowserRouter>
             <div className="App">
-                <Header/>
+                <HeaderContainer/>
 
                 <div className={s.Wrapper}>
                     <Navbar/>
-                    <Routes>
-                        <Route path='/profile' element={
-                            <ProfileContainer/>}
-                        />
-                        <Route path='/dialogs' element={
-                            <DialogsContainer/>}/>
-                        <Route path='/users' element={
-                            <UsersContainer/>}/>
-                    </Routes>
+<Routes>
+    <Route path='/profile/:userId' element={<ProfileContainer/>} />
+    <Route path='/profile' element={<ProfileContainer/>} />
+
+    <Route path='/dialogs' element={<DialogsContainer/>} />
+
+    <Route path='/users' element={<UsersContainer/>} />
+
+</Routes>
+
+
                 </div>
 
             </div>

@@ -7,29 +7,31 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import {Provider} from "react-redux";
 // import {Provider, StoreContext} from "./storeContext";
-import {store} from "./redux/reduxState";
+import {AppStateType, store} from "./redux/reduxState";
 // import {store} from "./redux/reduxState";
 
+const root = ReactDOM.createRoot(
+    document.getElementById('root') as HTMLElement
+);
 
-export const rerenderEntireTree = (state:StateType) => {
-    const root = ReactDOM.createRoot(
-        document.getElementById('root') as HTMLElement
-    );
+
+// export const rerenderEntireTree = () => {
+
     root.render(
-        <React.StrictMode>
+        // <React.StrictMode>
                <Provider store={store}>
                    <App/>
                </Provider>
-        </React.StrictMode>
+        // </React.StrictMode>
 
     );
-}
+// }
 
-rerenderEntireTree(store.getState())
-store.subscribe(() => {
-    let state = store.getState()
-    rerenderEntireTree(state)
-})
+// rerenderEntireTree(store.getState())
+// store.subscribe(() => {
+//     let state = store.getState()
+//     rerenderEntireTree(state)
+// })
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

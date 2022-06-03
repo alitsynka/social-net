@@ -5,14 +5,21 @@ import {ProfileInfo} from "./profileInfo/ProfileInfo";
 import {ActionsType, ProfilePageType, StoreType} from "../../redux/state";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
-
-
-
-export type ProfileType = {
-    profile:null
+type PhotosType = {
+    large:string
+    small:string
 }
 
-export const Profile = (props:ProfileType) => {
+type ProfileApiType = {
+    photos:PhotosType
+}
+export type ProfileType = {
+    profile:{
+    photos:PhotosType
+}
+}
+
+export const Profile = (props:any) => {
     return(
         <div className={s.Wrapper}>
            <ProfileInfo profile={props.profile}/>

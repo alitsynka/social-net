@@ -1,8 +1,10 @@
 import s from "./Users.module.css";
 import React from "react";
 import {UserType} from "../../redux/UsersReducer";
-import {NavLink} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 import team from "./images/team.png"
+import splint from "./images/Spin.svg";
+import axios from "axios";
 
 type UserFuncType = {
     totalUsersCount:number
@@ -12,41 +14,78 @@ type UserFuncType = {
     follow: (userId: number) => void
     unFollow: (userId: number) => void
     onPageChanged:(pageNumber:number) => void
+    isFetching:boolean
+
 }
 
 export const UserFunctionalComponent = (props:UserFuncType) => {
 
     const pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    // console.log(pageCount)
     const pages = []
-    for(let i=1; i <= pageCount; i++){
+    for(let i=1;i <= pageCount; i++){
         pages.push(i)
     }
 
+
     return(
         <div className={s.Wrapper}>
-            {/*<button onClick={this.getUsers}>get Users</button>*/}
+
+            {props.isFetching ? <img src={splint}/> : null}
             <div>
-                {pages.map(p => {
+                {pages?.map(p => {
+                    if(p > 20) return
                     return (
-                        <span className={props.currentPage === p ? s.selectPage : s.page}
+                        <span key={p} className={props.currentPage === p ? s.selectPage : s.page}
                               onClick={() => props.onPageChanged(p)}>{p}</span>
                     )
                 })}
             </div>
             {
-                props.users.map((u:any)  => {
+                props.users?.map((u)  => {
                     return (
                         <div key={u.id}>
                             <div className={s.ava}>
-                                <NavLink to={"/profile" }>
-                                    <img className={s.imag} src={team}/>
+                                <NavLink to={"/profile/" + u.id}>
+                                    <img className={s.imag} src={u.photos.small ?? team}/>
                                 </NavLink>
 
                                 <div>
                                     {
                                         u.followed
-                                            ? <button onClick={() => props.unFollow(u.id)}>unFollow</button>
-                                            : <button onClick={() => props.follow(u.id)}>follow</button>
+                                            ? <button onClick={() => {
+                                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{
+                                                    withCredentials:true,
+                                                    headers: {
+                                                        "API-KEY":"3ba86e10-18c1-48e9-9acb-2879020ab27c"
+                                                    }
+                                                })
+                                                    .then((res) => {
+                                                        if (res.data.resultCode === 0) {
+                                                            props.unFollow(u.id)
+                                                        }
+                                                    })
+                                                    }
+
+                                            }>
+                                                unFollow
+                                        </button>
+                                            : <button onClick={() => {
+                                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {},{
+                                                    withCredentials:true,
+                                                    headers: {
+                                                        "API-KEY":"3ba86e10-18c1-48e9-9acb-2879020ab27c"
+                                                    }
+                                                })
+                                                    .then((res) => {
+                                                        if(res.data.resultCode === 0){
+                                                            props.follow(u.id)
+                                                        }
+                                                    })
+                                            }
+                                            }>
+                                                follow
+                                            </button>
                                     }
                                 </div>
                             </div>

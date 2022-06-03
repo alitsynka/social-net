@@ -29,41 +29,37 @@ type UsersCurrentlyType = {
     toggleIsFetching:(isFetching:boolean) => void
 }
 
-type UserFuncType = {
-    setCurrentPage:(currentPage:number) => void
-    follow: (userId: number) => void
-    unFollow: (userId: number) => void
-    setUsers:(user:UserType[]) => void
-    setTotalUsersCount:(totalCount:number) => void
-    toggleIsFetching:(isFetching:boolean) => void
-}
 
 
-export class UsersApiComponent extends React.Component<UsersCurrentlyType> {
+
+export class UsersApiComponent extends React.Component<PropsType>{
 
     componentDidMount() {
-        // this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        this.props.toggleIsFetching(true)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            withCredentials:true
+        })
             .then((res) => {
-                // this.props.toggleIsFetching(false)
+                this.props.toggleIsFetching(false)
                 this.props.setUsers(res.data.items)
-                // this.props.setTotalUsersCount(res.data.totalCount)
+                this.props.setTotalUsersCount(res.data.totalCount)
             })
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
-        // this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        this.props.toggleIsFetching(true)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+            withCredentials:true
+        })
             .then((res) => {
-                // this.props.toggleIsFetching(false)
+                this.props.toggleIsFetching(false)
                 this.props.setUsers(res.data.items)
             })
     }
 
     render() {
         return <>
-            {this.props.isFetching ? <img src={splint}/> : null}
             <UserFunctionalComponent users={this.props.users}
                                      follow={this.props.follow}
                                      unFollow={this.props.unFollow}
@@ -71,22 +67,33 @@ export class UsersApiComponent extends React.Component<UsersCurrentlyType> {
                                      totalUsersCount={this.props.totalUsersCount}
                                      pageSize={this.props.pageSize}
                                      onPageChanged={this.onPageChanged}
+                                     isFetching={this.props.isFetching}
             />
 
         </>
     }}
 
 
-const mapStateToUsersProps = (state:UsersPageType):UsersStateType => {
-    return {
+const mapStateToUsersProps = (state: UsersPageType) => ({
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching:state.usersPage.isFetching
-    }
+
+} as const)
+
+type MapStateToPropsType = ReturnType<typeof mapStateToUsersProps>
+type MapDispatchToPropsType =  {
+    setCurrentPage:(currentPage:number) => void
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
+    setUsers:(user:UserType[]) => void
+    setTotalUsersCount:(totalCount:number) => void
+    toggleIsFetching:(isFetching:boolean) => void
 }
-const mapDispatchToUsersProps = (dispatch:Dispatch):UserFuncType => {
+type PropsType = MapStateToPropsType & MapDispatchToPropsType
+const mapDispatchToUsersProps = (dispatch:Dispatch):MapDispatchToPropsType => {
     return{
         follow:(userId:number) => {
             dispatch(followUsersAC(userId))
@@ -109,4 +116,4 @@ const mapDispatchToUsersProps = (dispatch:Dispatch):UserFuncType => {
     }
 }
 
-export const UsersContainer = connect(mapStateToUsersProps, mapDispatchToUsersProps)(UsersApiComponent)
+export const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, any, UsersPageType>(mapStateToUsersProps, mapDispatchToUsersProps)(UsersApiComponent)

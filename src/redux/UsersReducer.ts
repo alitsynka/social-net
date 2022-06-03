@@ -1,7 +1,21 @@
-const initialState:UsersStateType = {
-    users:[],
-    pageSize:5,
-    totalUsersCount:20,
+export type UserType = {
+    id:number
+    name:string
+    status:string
+    followed:boolean
+    location:{
+        city:string
+        country:string
+    }
+    photos: {
+        small: string | null,
+        large: string | null}
+    uniqueUrlName: string
+}
+const initialState = {
+    users:[] as UserType[],
+    pageSize:100,
+    totalUsersCount:0,
     currentPage:2,
     isFetching:false
 }
@@ -20,24 +34,15 @@ const spareUsers =  {
 }
 
 
-export type UserType = {
-    id:number
-    fullName:string
-    status:string
-    followed:boolean
-    location:{
-        city:string
-        country:string
-    }
-}
+export type UsersStateType = typeof initialState
+    // {
 
-export type UsersStateType = {
-    currentPage:number
-    pageSize:number
-    totalUsersCount:number
-    users:UserType[]
-    isFetching:boolean
-}
+    // currentPage:number
+    // pageSize:number
+    // totalUsersCount:number
+    // users:UserType[]
+    // isFetching:boolean
+// }
 
 type FollowType = {
     type:"FOLLOW"
@@ -65,7 +70,6 @@ type toggleIsFetchingType = {
 }
 export type UsersPageType = {
     usersPage:UsersStateType
-
 }
 type ActionsType = FollowType | UnFollowType
     | SetUsersType |SetCurrentPageType
