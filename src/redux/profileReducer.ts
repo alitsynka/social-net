@@ -1,5 +1,8 @@
 import React from "react";
 import {AddPostTypeAC, NewPostType, ProfilePageType, UpdateNewPostTypeAC} from "./state";
+import {usersApi} from "../api/api";
+import {ThunkDispatch} from "redux-thunk";
+import {AppStateType} from "./reduxState";
 
 type SetUserProfileType = {
     type: "SET-USER-PROFILE",
@@ -65,4 +68,9 @@ export const SetUserProfileAC = (profile: any): SetUserProfileType => {
         type:"SET-USER-PROFILE",
             profile
     }
+}
+export const GetUserProfileThunkCreator = (userId: number) => async (dispatch: ThunkDispatch<AppStateType, unknown, ProfileReducerAcType>) => {
+    usersApi.getProfile(userId).then(res => {
+        dispatch(SetUserProfileAC(res.data))
+    })
 }

@@ -1,12 +1,8 @@
 import React from "react";
 import {Profile} from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
-import {ProfilePageType} from "../../redux/state";
 import {ProfilePropsType} from "../../App";
-import {followUsersAC} from "../../redux/UsersReducer";
-import {SetUserProfileAC} from "../../redux/profileReducer";
-import {Dispatch} from "redux";
+import {GetUserProfileThunkCreator, SetUserProfileAC} from "../../redux/profileReducer";
 import {withRouter} from "../WithRouter/WithRouter";
 
 
@@ -25,18 +21,8 @@ export class ProfileApiContainer extends React.Component<any>{
         let userId = this.props.router.params?.userId;
         // console.log(this.props)
         if(userId){
-            axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-                .then(res => {
-                    // console.log(res.data)
-                    this.props.setUserProfile(res.data)
-                })
+            this.props.getUserProfile(userId)
         }
-
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile`)
-        //     .then(res => {
-        //     this.props.setUsersProfile(res.data)
-        //     })
-
     }
 
     render() {
@@ -52,10 +38,13 @@ const mapStateToProps = (state:any) => {
          }
     }
 
-const mapDispatchToProps = (dispatch:Dispatch) => {
+const mapDispatchToProps = (dispatch:any) => {
     return {
         setUserProfile: (profile: number) => {
             dispatch(SetUserProfileAC(profile))
+        },
+        getUserProfile:(userId:number) => {
+            dispatch(GetUserProfileThunkCreator(userId))
         }
     }
 }

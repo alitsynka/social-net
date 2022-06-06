@@ -2,19 +2,14 @@ import React from "react";
 import {Users} from "./Users";
 import {connect} from "react-redux";
 import {
-    followUsersAC, setCurrentPageAC, setTotalUsersCountAC,
+    followUsersAC, followUserThunkCreator, getUsersThunkCreator, setCurrentPageAC, setTotalUsersCountAC,
     setUsersAC, toggleFollowingProgressAC, toggleIsFetchingAC,
-    unFollowUsersAC,
+    unFollowUsersAC, unFollowUserThunkCreator,
     UsersPageType, UsersStateType,
     UserType
 } from "../../redux/UsersReducer";
 import axios from "axios";
 import {UserFunctionalComponent} from "./UserFunctionalComponent";
-import splint from './images/Spin.svg'
-import {Dispatch} from "redux";
-import {AppStateType} from "../../redux/reduxState";
-import {getUsers} from "../../api/api";
-
 
 type UsersCurrentlyType = {
     users: UserType[]
@@ -34,21 +29,11 @@ type UsersCurrentlyType = {
 export class UsersApiComponent extends React.Component<PropsType> {
 
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        getUsers(this.props.currentPage, this.props.pageSize).then((res) => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(res.data.items)
-            this.props.setTotalUsersCount(res.data.totalCount)
-        })
+        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize)
     }
 
-    onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber)
-        this.props.toggleIsFetching(true)
-        getUsers(pageNumber, this.props.pageSize).then((res) => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(res.data.items)
-        })
+    onPageChanged = (pageNumber: number) => {debugger
+        this.props.getUsersThunk(pageNumber, this.props.pageSize)
     }
 
     render() {
@@ -63,8 +48,9 @@ export class UsersApiComponent extends React.Component<PropsType> {
                                      isFetching={this.props.isFetching}
                                      followingProgress={this.props.followingProgress}
                                      toggleFollowingProgress={this.props.toggleFollowingProgress}
+                                     unFollowUserThunk={this.props.unFollowUserThunk}
+                                     followUserThunk={this.props.followUserThunk}
             />
-
         </>
     }
 }
@@ -88,10 +74,13 @@ type MapDispatchToPropsType = {
     setUsers: (user: UserType[]) => void
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
-    toggleFollowingProgress: (isFetching: number[] | boolean , userId:number) => void
+    toggleFollowingProgress: (isFetching: number[] | boolean , userId:number) => void,
+    getUsersThunk:(currentPage:number, pageSize:number) => void,
+    unFollowUserThunk:(userId:number) => void,
+    followUserThunk:(userId:number) => void
 }
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
-const mapDispatchToUsersProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+const mapDispatchToUsersProps = (dispatch: any): MapDispatchToPropsType => {
     return {
         follow: (userId: number) => {
             dispatch(followUsersAC(userId))
@@ -113,6 +102,15 @@ const mapDispatchToUsersProps = (dispatch: Dispatch): MapDispatchToPropsType => 
         },
         toggleFollowingProgress: (isFetching: number[] | boolean, userId:number) => {
             dispatch(toggleFollowingProgressAC(isFetching, userId))
+        },
+        getUsersThunk:(currentPage:number, pageSize:number) => {
+            dispatch(getUsersThunkCreator(currentPage, pageSize))
+        },
+        unFollowUserThunk:(userId:number) => {
+            dispatch(unFollowUserThunkCreator(userId))
+        },
+        followUserThunk:(userId:number) => {
+            dispatch(followUserThunkCreator(userId))
         }
     }
 }

@@ -8,10 +8,10 @@ import s from "./components/main/Main.module.css";
 import {Navbar} from "./components/navbar/Navbar";
 import {ActionsType, StateType, StoreType} from "./redux/state";
 import {DialogsContainer} from "./components/dialogs/DialogsContainer";
-import {Users} from "./components/users/Users";
 import {UsersContainer} from "./components/users/UsersContainer";
 import {ProfileContainer} from "./components/profile/ProfileContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
+import {LoginContainer} from "./components/login/LOgin";
 
 export type ProfilePropsType = {
     id: number
@@ -42,10 +42,9 @@ function App(props: AppType) {
     <Route path='/dialogs' element={<DialogsContainer/>} />
 
     <Route path='/users' element={<UsersContainer/>} />
+    <Route path='/login' element={<LoginContainer/>} />
 
 </Routes>
-
-
                 </div>
 
             </div>
