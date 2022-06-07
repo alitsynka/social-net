@@ -1,14 +1,7 @@
 import React from "react";
 import s from './Users.module.css'
-import { UserType} from "../../redux/UsersReducer";
 import axios from "axios";
 
-type UsersCurrentlyType = {
-    users: UserType[]
-    follow: (userId: number) => void
-    unFollow: (userId: number) => void
-    setUsers: (user: UserType[]) => void
-}
 
 
 export const Users = (props: any) => {
@@ -23,20 +16,6 @@ export const Users = (props: any) => {
 
                 }
             }
-
-
-    // if(props.users.length === 0){
-    //     props.setUsers([
-    //         {id:1, fullName:"Veronika", status:"I`m a pet doctor", followed:true,
-    //             location:{city:"Vitebck", country:"Belarus"}},
-    //
-    //         {id:2, fullName:"Angelina", status:"I`m a teacher", followed:false,
-    //             location:{city:"Mir", country:"Belarus"}},
-    //
-    //         {id:3, fullName:"Zhanat", status:"I`m a programmer", followed:true,
-    //             location:{city:"Dzerzhinsk", country:"Belarus"}}
-    //     ])
-    // }
 
 
     return (

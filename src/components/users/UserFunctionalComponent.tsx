@@ -42,7 +42,6 @@ export const UserFunctionalComponent = (props:UserFuncType) => {
                     return (
                             <span key={p} className={props.currentPage === p ? s.selectPage : s.page}
                                   onClick={() => {
-                                      debugger
                                       return(props.onPageChanged(p))
                                     }}>{p}</span>
                     )

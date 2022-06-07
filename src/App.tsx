@@ -2,14 +2,12 @@ import React from 'react';
 import './App.css';
 import {Header} from "./components/header/Header";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {Dialogs, ItemPropsType, MessagesPropsType} from "./components/dialogs/Dialogs";
-import {Profile} from "./components/profile/Profile";
 import s from "./components/main/Main.module.css";
 import {Navbar} from "./components/navbar/Navbar";
 import {ActionsType, StateType, StoreType} from "./redux/state";
 import {DialogsContainer} from "./components/dialogs/DialogsContainer";
 import {UsersContainer} from "./components/users/UsersContainer";
-import {ProfileContainer} from "./components/profile/ProfileContainer";
+import {ProfileApiContainer, ProfileContainer} from "./components/profile/ProfileContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
 import {LoginContainer} from "./components/login/LOgin";
 

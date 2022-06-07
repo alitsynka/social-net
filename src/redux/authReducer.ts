@@ -6,7 +6,6 @@ type initialStateType = {
     userId:null | number
     email:null | string
     login:null | string
-
 }
 
 

@@ -10,6 +10,7 @@ import {
 } from "../../redux/UsersReducer";
 import axios from "axios";
 import {UserFunctionalComponent} from "./UserFunctionalComponent";
+import {compose} from "redux";
 
 type UsersCurrentlyType = {
     users: UserType[]
@@ -32,7 +33,7 @@ export class UsersApiComponent extends React.Component<PropsType> {
         this.props.getUsersThunk(this.props.currentPage, this.props.pageSize)
     }
 
-    onPageChanged = (pageNumber: number) => {debugger
+    onPageChanged = (pageNumber: number) => {
         this.props.getUsersThunk(pageNumber, this.props.pageSize)
     }
 

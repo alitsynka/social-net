@@ -1,5 +1,6 @@
 import s from "./ProfileInfo.module.css";
 import React from "react";
+import {ProfileStatus} from "../profileStatus/ProfileStatus";
 
 type ProfileInfoType = {
     profile:null | object
@@ -9,14 +10,6 @@ type PhotosType = {
     small:string
 }
 
-type ProfileApiType = {
-    photos:PhotosType
-}
-export type ProfileType = {
-    profile:{
-        photos:PhotosType
-    }
-}
 export const ProfileInfo = (props:any) => {
 
     // if(!props.profile){
@@ -31,14 +24,15 @@ export const ProfileInfo = (props:any) => {
                 {
                     !props.profile
 
-                    ? <div> here should be preloader</div>
+                    ? <div> here should be users ava</div>
                     : <div>
                     <div>
                         <img src={props.profile.photos.small}/>
                     </div>
-                        ava + description
+
                     </div>
                 }
+                <ProfileStatus status={'red sea'}/>
             </div>
         </div>
 

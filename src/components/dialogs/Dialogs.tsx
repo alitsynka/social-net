@@ -1,10 +1,11 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useEffect} from "react";
 import s from './Dialogs.module.css'
 import {DialogMessage} from "./message/DialogMessage";
 import {DialogItem} from "./item/DialogItem";
 import {MessagesPageType} from "../../redux/state";
 import {store} from "../../redux/reduxState";
-
+import Redirect from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 export type ItemPropsType = {
     id: number
@@ -17,10 +18,12 @@ export type MessagesPropsType = {
 
 }
 
+
 type DialogsType = {
     updateNewMessageBody:(body:string) => void
     sendMessage:() => void
     messagesPage:MessagesPageType
+    login:string | boolean
 }
 
 export const Dialogs = (props: DialogsType) => {
@@ -33,6 +36,16 @@ export const Dialogs = (props: DialogsType) => {
           let newMessageBody =  e.currentTarget.value
             props.updateNewMessageBody(newMessageBody)
     }
+
+    // if(props.login === false) return <Redirect to={"/login"} />
+
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        if (props.login === false){
+            return navigate("/login");
+        }
+    },[props.login]);
 
     return (
         <div className={s.Wrapper}>

@@ -14,8 +14,12 @@
 }
 .selectPage{
 	font-weight: bold;
+	font-size:20px;
 	color: gold;
 }
 .page{
+font-weight: bolder;
 	color: grey;
+font-size:16px;
+	margin:5px 5px;
 }
