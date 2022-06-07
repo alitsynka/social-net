@@ -3,15 +3,27 @@ import s from './Profile.module.css';
 import {ProfileInfo} from "./profileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
-type PhotosType = {
-    large:string
-    small:string
+export type ProfilePhotosType ={
+    photos:{
+        small:string
+        large:string
+    }
 }
 
-export const Profile = (props:any) => {
+type CurrentlyProfileType = {
+    getUserStatus: (userId: number) => void
+    updateUserStatus: (status: string) => void
+    status:string
+    profile:ProfilePhotosType
+}
+
+export const Profile = (props:CurrentlyProfileType) => {
     return(
         <div className={s.Wrapper}>
-           <ProfileInfo profile={props.profile}/>
+           <ProfileInfo profile={props.profile}
+                        status={props.status}
+                        updateUserStatus={props.updateUserStatus}
+           />
             <MyPostsContainer />
         </div>
     )

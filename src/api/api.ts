@@ -28,3 +28,17 @@ export const authAPi = {
         return instance.get(`auth/me` )
     }
 }
+
+export const profileApi = {
+    getProfile(userId:number){
+        return instance.get(`profile/` + userId)
+    },
+    getStatus(userId:number) {
+        return instance.get(`profile/status/` + userId)
+
+    },
+    updateStatus(status:string) {
+        return instance.put(`profile/status/`, {status:status});
+
+    }
+}

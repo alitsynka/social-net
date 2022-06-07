@@ -2,15 +2,19 @@ import s from "./ProfileInfo.module.css";
 import React from "react";
 import {ProfileStatus} from "../profileStatus/ProfileStatus";
 
-type ProfileInfoType = {
-    profile:null | object
-}
-type PhotosType = {
-    large:string
-    small:string
+export type ProfilePhotosType ={
+        photos:{
+            small:string
+            large:string
+        }
 }
 
-export const ProfileInfo = (props:any) => {
+type ProfileInfoType = {
+    updateUserStatus: (status: string) => void
+    status:string
+    profile:ProfilePhotosType
+}
+export const ProfileInfo = (props:ProfileInfoType) => {
 
     // if(!props.profile){
     //     return <div> here should be preloader</div>
@@ -32,7 +36,9 @@ export const ProfileInfo = (props:any) => {
 
                     </div>
                 }
-                <ProfileStatus status={'red sea'}/>
+                <ProfileStatus status={props.status}
+                               updateUserStatus={props.updateUserStatus}
+                />
             </div>
         </div>
 

@@ -55,12 +55,10 @@ export const UserFunctionalComponent = (props:UserFuncType) => {
                                 <NavLink to={"/profile/" + u.id}>
                                     <img className={s.imag} src={u.photos.small ?? team}/>
                                 </NavLink>
-
                                 <div>
                                     {
                                         u.followed
                                             ? <button disabled={props.followingProgress.some(id => id === u.id)} onClick={() => {props.unFollowUserThunk(u.id)}
-
                                             }>
                                                 unFollow
                                         </button>

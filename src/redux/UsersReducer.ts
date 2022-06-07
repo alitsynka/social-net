@@ -1,6 +1,5 @@
-import {Action, Dispatch} from "redux";
 import { usersApi} from "../api/api";
-import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import { ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "./reduxState";
 
 export type UserType = {
@@ -22,7 +21,7 @@ const initialState = {
     users: [] as UserType[],
     pageSize: 100,
     totalUsersCount: 0,
-    currentPage: 2,
+    currentPage: 1,
     isFetching: false,
     followingProgress: [2, 3],
 }
