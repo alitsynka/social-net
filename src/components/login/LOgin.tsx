@@ -1,37 +1,37 @@
 import React from "react";
 import s from "./Login.module.css";
-import {reduxForm} from "redux-form"
-
-const LoginReduxForm = (props:any) => reduxForm({
-
-})()
-
-export const LoginContainer = () => {
-    return <div className={s.Wrapper}>
-        <div>
-            <h1> LOGIN</h1>
-        </div>
-       <LoginForm/>
-    </div>
-}
+import {Field, reduxForm} from "redux-form"
 
 
-export const LoginForm = () => {
-    return(<>
-            <form>
+export const LoginForm = (props:any) => {
+    return(<form onSubmit={props.handleSubmit}>
                 <div>
-                    <input placeholder={"login"}/>
+                    <Field placeholder={"login"} name={"login"} component={"input"}/>
                 </div>
                 <div>
-                    <input placeholder={"password"}/>
+                    <Field placeholder={"password"} name={"pass"} component={"input"}/>
                 </div>
                 <div>
-                    <input placeholder={"chekbox"}/> remember me
+                    <Field type={"checkbox"} name={"rememberMe"} component={"input"}/> remember me
                 </div>
                 <div>
                     <button>Login or logOut</button>
                 </div>
             </form>
-    </>
     )
+}
+const LoginReduxForm = reduxForm({form:'login'})(LoginForm)
+
+export const LoginContainer = () => {
+
+    const onSubmit = () => {
+
+    }
+
+    return <div className={s.Wrapper}>
+        <div>
+            <h1> LOGIN</h1>
+        </div>
+        <LoginReduxForm/>
+    </div>
 }

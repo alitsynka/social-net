@@ -6,6 +6,7 @@ import {MessagesPageType} from "../../redux/state";
 import {store} from "../../redux/reduxState";
 import Redirect from "react-router-dom"
 import { useNavigate } from "react-router-dom";
+import {Field, reduxForm} from "redux-form";
 
 export type ItemPropsType = {
     id: number
@@ -47,6 +48,10 @@ export const Dialogs = (props: DialogsType) => {
         }
     },[props.login]);
 
+    const addNewMessage = (value:any) => {
+      alert(value.newMessageBody)
+    }
+
     return (
         <div className={s.Wrapper}>
             <div className={s.Items}>
@@ -65,19 +70,25 @@ export const Dialogs = (props: DialogsType) => {
                         )
                     })
                 }
-                <div>
-                    <textarea
-                        value={newMessage}
-                        onChange={onMessageChangeClick}
-                        placeholder={'enter your message'}/>
-                </div>
-                <div>
-                    <button onClick={onSendMessageClick}>
-                        send
-                    </button>
-                </div>
+                <AddMessageFormRedux onSubmit={addNewMessage}/>
             </div>
         </div>
     )
 }
-
+export const ADDMessageForm = (props:any) => {
+    return(
+        <div>
+            <form onSubmit={props.handleSubmit}>
+                <div>
+                    <Field component={"textarea"} name={"newMessageBody"} placeholder={"enter your message"}/>
+                </div>
+                <div>
+                    <button>
+                        send
+                    </button>
+                </div>
+            </form>
+        </div>
+    )
+}
+const AddMessageFormRedux = reduxForm({form:"dialogsMessageForm"})(ADDMessageForm)
