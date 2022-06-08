@@ -19,7 +19,6 @@ type UpdateUserStatusType = {
 }
  type ProfileReducerPageType = {
     posts: Array<ProfilePropsType>
-    newPostText: string
     profile:null
     status:string
 }
@@ -35,7 +34,6 @@ const initialState: ProfileReducerPageType = {
         {id: 3, message: 'Ostalbeney', likeCount: 4},
         {id: 4, message: 'Wisley', likeCount: 40},
     ],
-    newPostText: 'it its my job',
     profile:null,
     status:""
 }
@@ -45,7 +43,7 @@ export const profileReducer = (state: ProfileReducerPageType = initialState, act
         case "ADD-POST": {
             let newPost: NewPostType = {
                 id: 5,
-                message: state.newPostText,
+                message: action.newPostText,
                 likeCount: 0
             }
             const stateCopy = {
@@ -55,13 +53,13 @@ export const profileReducer = (state: ProfileReducerPageType = initialState, act
             }
             return stateCopy
         }
-        case "UPDATE-NEW-POST-TEXT": {
-            const stateCopy = {
-                ...state,
-                newPostText: action.newText
-            }
-            return stateCopy
-        }
+        // case "UPDATE-NEW-POST-TEXT": {
+        //     const stateCopy = {
+        //         ...state,
+        //         newPostText: action.newText
+        //     }
+        //     return stateCopy
+        // }
         case "SET-USER-PROFILE":{
             return  {...state, profile:action.profile}
         }
@@ -75,9 +73,10 @@ export const profileReducer = (state: ProfileReducerPageType = initialState, act
             return state
     }
 }
-export const addPostAC = (): AddPostTypeAC => {
+export const addPostAC = (newPostText:string): AddPostTypeAC => {
     return {
-        type: "ADD-POST" as const
+        type: "ADD-POST" as const,
+        newPostText
     }
 }
 export const UpdateNewPostAC = (newText: string): UpdateNewPostTypeAC => {

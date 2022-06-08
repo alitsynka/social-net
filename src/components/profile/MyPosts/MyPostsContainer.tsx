@@ -19,11 +19,11 @@ const mapStateToProps = (state:StateType) => {
 }
 const mapDispatchToProps = (dispatch:any) => {
     return{
-        updateNewPostText:(text:string) => {
-            dispatch(UpdateNewPostAC(text))
-        },
-        addPost:() => {
-            dispatch(addPostAC())
+        // updateNewPostText:(text:string) => {
+        //     dispatch(UpdateNewPostAC(text))
+        // },
+        addPost:(newPostText:string) => {
+            dispatch(addPostAC(newPostText))
     }
     }
 }

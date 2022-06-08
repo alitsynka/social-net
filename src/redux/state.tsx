@@ -11,7 +11,6 @@ export type ProfilePageType = {
 export type MessagesPageType = {
     items: Array<ItemPropsType>
     messages: Array<MessagesPropsType>
-    newMessageBody: string
 }
 
 export type StateType = {
@@ -25,6 +24,7 @@ export type NewPostType = {
 }
 export type AddPostTypeAC = {
     type: "ADD-POST"
+    newPostText:string
 }
 export type UpdateNewPostTypeAC = {
     type: "UPDATE-NEW-POST-TEXT"
@@ -36,7 +36,7 @@ export type UpdateNewMessageBodyTypeAC = {
 }
 export type SendNewMessageBodyTypeAC = {
     type: "SEND-NEW-MESSAGE-BODY"
-    // newMessageBody: string
+    newMessageBody: string
 }
 export type ActionsType = UpdateNewPostTypeAC
                         | AddPostTypeAC
@@ -82,7 +82,7 @@ export type StoreType = {
                 {id: 3, message: "Hi, im your mom"},
                 {id: 4, message: "Hi, im your dad"},
             ],
-            newMessageBody: ''
+
         },
     },
     getState() {

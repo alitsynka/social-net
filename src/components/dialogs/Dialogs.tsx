@@ -22,21 +22,21 @@ export type MessagesPropsType = {
 
 type DialogsType = {
     updateNewMessageBody:(body:string) => void
-    sendMessage:() => void
+    sendMessage:(newMessageBody:string) => void
     messagesPage:MessagesPageType
     login:string | boolean
 }
 
 export const Dialogs = (props: DialogsType) => {
-    const newMessage = props.messagesPage.newMessageBody
+    // const newMessage = props.messagesPage.newMessageBody
 
-    const onSendMessageClick = () => {
-         props.sendMessage()
-    }
-    const onMessageChangeClick = (e:ChangeEvent<HTMLTextAreaElement>) => {
-          let newMessageBody =  e.currentTarget.value
-            props.updateNewMessageBody(newMessageBody)
-    }
+    // const onSendMessageClick = () => {
+    //      props.sendMessage()
+    // }
+    // const onMessageChangeClick = (e:ChangeEvent<HTMLTextAreaElement>) => {
+    //       let newMessageBody =  e.currentTarget.value
+    //         props.updateNewMessageBody(newMessageBody)
+    // }
 
     // if(props.login === false) return <Redirect to={"/login"} />
 
@@ -49,7 +49,7 @@ export const Dialogs = (props: DialogsType) => {
     },[props.login]);
 
     const addNewMessage = (value:any) => {
-      alert(value.newMessageBody)
+       props.sendMessage(value.newMessageBody)
     }
 
     return (

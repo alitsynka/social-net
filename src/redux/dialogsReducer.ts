@@ -25,24 +25,22 @@ const initialState:MessagesPageType = {
         {id: 3, message: "Hi, im your mom"},
         {id: 4, message: "Hi, im your dad"},
     ],
-    newMessageBody: ''
 }
 
 export const dialogsReducer = (state: MessagesPageType = initialState, action: DialogsReducerType):MessagesPageType => {
 
     switch (action.type){
-        case "UPDATE-NEW-MESSAGE-BODY": {
-            const stateCopy = {
-                ...state,
-                newMessageBody:action.newMessageBody
-            }
-            return stateCopy
-        }
+        // case "UPDATE-NEW-MESSAGE-BODY": {
+        //     const stateCopy = {
+        //         ...state,
+        //         newMessageBody:action.newMessageBody
+        //     }
+        //     return stateCopy
+        // }
         case "SEND-NEW-MESSAGE-BODY": {
-            let body = state.newMessageBody
+            let body = action.newMessageBody
             const stateCopy = {
                 ...state,
-                newMessageBody:"",
                 messages: [...state.messages, {id:6, message:body}]
             }
             return stateCopy
@@ -51,15 +49,15 @@ export const dialogsReducer = (state: MessagesPageType = initialState, action: D
             return state
     }
 }
-export const UpdateNewMessageBodyAC = (newMessageBody: string): UpdateNewMessageBodyTypeAC => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-BODY" as const,
-        newMessageBody
-    }
-}
-export const SendNewMessageBodyAC = (): SendNewMessageBodyTypeAC => {
+// export const UpdateNewMessageBodyAC = (newMessageBody: string): UpdateNewMessageBodyTypeAC => {
+//     return {
+//         type: "UPDATE-NEW-MESSAGE-BODY" as const,
+//         newMessageBody
+//     }
+// }
+export const SendNewMessageBodyAC = (newMessageBody:string): SendNewMessageBodyTypeAC => {
     return {
         type: "SEND-NEW-MESSAGE-BODY" as const,
-
+        newMessageBody
     }
 }

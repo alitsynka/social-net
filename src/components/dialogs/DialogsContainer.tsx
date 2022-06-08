@@ -1,6 +1,6 @@
 import React from "react";
 import { MessagesPageType, ProfilePageType} from "../../redux/state";
-import {SendNewMessageBodyAC, UpdateNewMessageBodyAC} from "../../redux/dialogsReducer";
+import {SendNewMessageBodyAC} from "../../redux/dialogsReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {WithAuthRedirectComponent} from "../../hoc/WithAuthredirectComponent";
@@ -22,12 +22,12 @@ const mapStateToProps = (state:StateType) => {
 const mapDispatchToProps = (dispatch:any) => {
 
     return{
-        sendMessage:() => {
-            dispatch(SendNewMessageBodyAC())
+        sendMessage:(newMessageBody:string) => {
+            dispatch(SendNewMessageBodyAC(newMessageBody))
         },
-        updateNewMessageBody:(body:string) => {
-            dispatch(UpdateNewMessageBodyAC(body))
-        }
+        // updateNewMessageBody:(body:string) => {
+        //     dispatch(UpdateNewMessageBodyAC(body))
+        // }
     }
 }
 // const AuthRedirectComponentDialogs = WithAuthRedirectComponent(Dialogs)
